@@ -4,8 +4,6 @@ public class Libro {
     String titulo;
     java.lang.String author;
     int anoPublicacion;
-
-    // Método constructor
     public Libro() {
         titulo = "El Señor de los Anillos";
         author = "J.R.R. Tolkien";
