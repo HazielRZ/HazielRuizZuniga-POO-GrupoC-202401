@@ -1,12 +1,16 @@
 public class Visitante {
-    private String name, apellidos;
+    private int id;
+    private String nombre;
+    private String apellidos;
     private String fechaNacimiento;
     private String curp;
     private int numeroVisitas;
     private String fechaRegistro;
 
-    public Visitante(String name, String apellidos, String fechaNacimiento, String curp, int numeroVisitas, String fechaRegistro) {
-        this.name = name;
+    // Constructor con ID generado automáticamente
+    public Visitante(int id, String nombre, String apellidos, String fechaNacimiento, String curp, int numeroVisitas, String fechaRegistro) {
+        this.id = id;
+        this.nombre = nombre;
         this.apellidos = apellidos;
         this.fechaNacimiento = fechaNacimiento;
         this.curp = curp;
@@ -14,12 +18,21 @@ public class Visitante {
         this.fechaRegistro = fechaRegistro;
     }
 
-    public String getName() {
-        return name;
+    // Getters y setters
+    public int getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getApellidos() {
@@ -61,6 +74,4 @@ public class Visitante {
     public void setFechaRegistro(String fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
-
-
 }

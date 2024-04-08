@@ -8,7 +8,7 @@ public class Visita {
     ArrayList<Visitante> Visitantes = new ArrayList<Visitante>();
     private double costoTotalVisita;
     String fechaVisita;
-    private int cantidadNiños;
+    private int cantidadNinos;
     private int cantidadAdultos;
     private int numeroVisitas;
 
@@ -16,7 +16,7 @@ public class Visita {
         this.turnoGuia = turnoGuia;
         this.costoTotalVisita = costoTotalVisita;
         this.fechaVisita = fechaVisita;
-        this.cantidadNiños = cantidadNiños;
+        this.cantidadNinos = cantidadNinos;
         this.cantidadAdultos = cantidadAdultos;
     }
 
@@ -70,12 +70,12 @@ public class Visita {
 
     }
 
-    public int getCantidadNiños() {
-        return cantidadNiños;
+    public int getCantidadNinos() {
+        return cantidadNinos;
     }
 
-    public void setCantidadNiños(int cantidadNiños) {
-        this.cantidadNiños = cantidadNiños;
+    public void setCantidadNinos(int cantidadNinos) {
+        this.cantidadNinos = cantidadNinos;
     }
 
     public int getCantidadAdultos() {

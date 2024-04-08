@@ -1,31 +1,50 @@
 import java.util.Date;
 
 public class Empleado {
-    private String   name, apellidos;
+    private int id;
+    private String nombre;
+    private String apellidos;
     private Date fechaNacimiento;
     private Date fechaIngreso;
-    private String RFC, curp;
+    private String RFC;
+    private String curp;
     private double salario = 0;
     private String horario;
-    private String rol;//mantenimiento, veterinario, guia, administracion
+    private String rol; // mantenimiento, veterinario, guia, administracion
 
-    public Empleado(String name, String apellidos, Date fechaNacimiento, Date fechaIngreso, String RFC, String curp, String horario, String rol) {
-        this.name = name;
+    public Empleado(int id, String nombre, String apellidos, Date fechaNacimiento, Date fechaIngreso,
+                    String RFC, String curp, double salario, String horario, String rol) {
+        this.id = id;
+        this.nombre = nombre;
         this.apellidos = apellidos;
         this.fechaNacimiento = fechaNacimiento;
         this.fechaIngreso = fechaIngreso;
         this.RFC = RFC;
         this.curp = curp;
+        this.salario = salario;
         this.horario = horario;
         this.rol = rol;
     }
 
-    public String getName() {
-        return name;
+    public Empleado(String nombreGuia) {
     }
 
-    public void setName(String name) {
-        this.name = name;
+
+    // Getters y setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getApellidos() {
@@ -92,6 +111,19 @@ public class Empleado {
         this.rol = rol;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Empleado{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", fechaIngreso=" + fechaIngreso +
+                ", RFC='" + RFC + '\'' +
+                ", curp='" + curp + '\'' +
+                ", salario=" + salario +
+                ", horario='" + horario + '\'' +
+                ", rol='" + rol + '\'' +
+                '}';
+    }
 }
