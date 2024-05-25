@@ -16,10 +16,9 @@ public class Profesor extends Empleado {
     // Constructor
     public Profesor(String nombre, String apellidos, LocalDate fechaNacimiento, String sexo, String ciudad, String estado,
                     String direccion, double sueldo, String nombreUsuario, String contrasena) {
-        super(nombre, apellidos, fechaNacimiento, sexo, ciudad, estado, direccion, LocalDate.now(), "Profesor",nombreUsuario, contrasena, sueldo);
+        super(nombre, apellidos, fechaNacimiento, sexo, ciudad, estado, direccion, LocalDate.now(), "Profesor", sueldo, nombreUsuario, contrasena);
         GestorId gestorId = GestorId.getInstancia();
         this.idUsuario = gestorId.generarIdProfesor();
-
     }
 
     // Métodos CRUD

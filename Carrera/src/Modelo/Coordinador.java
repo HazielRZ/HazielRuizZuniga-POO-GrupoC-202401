@@ -17,8 +17,8 @@ public class Coordinador extends Empleado {
 
     // Constructor
     public Coordinador(String nombre, String apellidos, LocalDate fechaNacimiento, String sexo, String ciudad, String estado,
-                       String direccion, double sueldo, Carrera carrera,String nombreUsuario, String contrasena) {
-        super(nombre, apellidos, fechaNacimiento, sexo, ciudad, estado, direccion, LocalDate.now(), "Coordinador",nombreUsuario, contrasena, sueldo);
+                       String direccion, double sueldo, Carrera carrera, String nombreUsuario, String contrasena) {
+        super(nombre, apellidos, fechaNacimiento, sexo, ciudad, estado, direccion, LocalDate.now(), "Coordinador", sueldo, nombreUsuario, contrasena);
         GestorId gestorId = GestorId.getInstancia();
         this.idUsuario = gestorId.generarIdProfesor();
         this.carrera = carrera;

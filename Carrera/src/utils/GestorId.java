@@ -20,15 +20,18 @@ public class GestorId {
 
     private GestorId() {
     }
-
     public static GestorId getInstancia() {
         if (instancia == null) {
             instancia = new GestorId();
             try {
-                instancia.cargarContadores("contadores.json"); // Intenta cargar los contadores al inicio
+                instancia.cargarContadores("contadores.json");
             } catch (IOException e) {
-                // Si el archivo no existe, se usarán los valores iniciales de los contadores
-                System.out.println("No se pudieron cargar los contadores: " + e.getMessage());
+                // Si el archivo no existe, crearlo con valores iniciales
+                try {
+                    instancia.guardarContadores("contadores.json");
+                } catch (IOException ex) {
+                    System.err.println("Error al crear el archivo de contadores: " + ex.getMessage());
+                }
             }
         }
         return instancia;

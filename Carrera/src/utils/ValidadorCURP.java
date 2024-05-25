@@ -50,8 +50,16 @@ public class ValidadorCURP {
 
     public static String generarCURP(Usuario usuario) {
         String nombre = limpiarNombre(usuario.getNombre());
-        String apellido1 = limpiarNombre(usuario.getApellidos().split(" ")[0]);
-        String apellido2 = usuario.getApellidos().split(" ").length > 1 ? limpiarNombre(usuario.getApellidos().split(" ")[1]) : "X";
+        String[] apellidos = usuario.getApellidos().split(" ");
+        String apellido1 = limpiarNombre(apellidos[0]);
+        String apellido2 = apellidos.length > 1 ? limpiarNombre(apellidos[1]) : "X";
+
+        // Asegurarse de que apellido1 tenga al menos 2 letras
+        apellido1 = (apellido1.length() >= 2) ? apellido1.substring(0, 2) : apellido1 + "X";
+
+        // Asegurarse de que apellido2 tenga al menos 1 letra
+        apellido2 = (apellido2.length() >= 1) ? apellido2.substring(0, 1) : "X";
+
         LocalDate fechaNacimiento = usuario.getFechaNacimiento();
 
         String fechaNacimientoStr = fechaNacimiento.format(DateTimeFormatter.ofPattern("yyMMdd"));
@@ -69,7 +77,7 @@ public class ValidadorCURP {
 
         return apellido1.charAt(0) + primeraVocalInternaApellido1 + apellido2.charAt(0) +
                 nombre.charAt(0) + fechaNacimientoStr + sexo + entidadNacimiento +
-                consonantesApellido1.substring(1, 3) + homoclave;
+                consonantesApellido1.substring(1, Math.min(3, consonantesApellido1.length())) + homoclave;
     }
 
     // ... (otros métodos auxiliares: limpiarNombre, obtenerConsonantes, etc.)

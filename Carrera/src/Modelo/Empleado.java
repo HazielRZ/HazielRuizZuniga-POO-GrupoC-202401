@@ -13,13 +13,12 @@ public class Empleado extends Usuario {
 
     // Constructor
     public Empleado(String nombre, String apellidos, LocalDate fechaNacimiento, String sexo, String ciudad, String estado,
-                    String direccion, LocalDate fechaRegistro, String rol,String nombreUsuario, String contrasena, double sueldo) {
+                    String direccion, LocalDate fechaRegistro, String rol, double sueldo, String nombreUsuario, String contrasena) {
         super(nombre, apellidos, fechaNacimiento, sexo, ciudad, estado, direccion, fechaRegistro, rol, nombreUsuario, contrasena);
         this.sueldo = sueldo;
         this.materiasImpartidas = new ArrayList<>();
         this.rfc = ValidadorRFC.generarRFC(this);
     }
-
 
     public String getRfc() {
         return rfc;
