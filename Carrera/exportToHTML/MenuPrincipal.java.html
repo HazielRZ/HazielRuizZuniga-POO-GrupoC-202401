@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>MenuPrincipal.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MenuPrincipal.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">Fachada</span><span class="s2">.</span><span class="s1">Fachada</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">Modelo</span><span class="s2">.</span><span class="s1">Usuario</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">MenuPrincipal </span><span class="s0">extends </span><span class="s1">Menu </span><span class="s2">{</span>
+    <span class="s0">private final </span><span class="s1">Usuario usuarioActual</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">MenuPrincipal</span><span class="s2">(</span><span class="s1">Fachada fachada</span><span class="s2">, </span><span class="s1">Usuario usuarioActual</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">(</span><span class="s1">fachada</span><span class="s2">);</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">usuarioActual </span><span class="s2">= </span><span class="s1">usuarioActual</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">mostrar</span><span class="s2">() {</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">MENÚ PRINCIPAL&quot;</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;1. Consultar información personal&quot;</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;2. Cerrar sesión&quot;</span><span class="s2">);</span>
+
+        <span class="s4">// Opciones adicionales según el rol del usuario</span>
+        <span class="s0">switch </span><span class="s2">(</span><span class="s1">usuarioActual</span><span class="s2">.</span><span class="s1">getRol</span><span class="s2">()) {</span>
+            <span class="s0">case </span><span class="s3">&quot;Alumno&quot;</span><span class="s2">:</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;3. Consultar calificaciones&quot;</span><span class="s2">);</span>
+                <span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">case </span><span class="s3">&quot;Profesor&quot;</span><span class="s2">:</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;3. Registrar calificaciones&quot;</span><span class="s2">);</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;4. Consultar grupos&quot;</span><span class="s2">);</span>
+                <span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">case </span><span class="s3">&quot;Coordinador&quot;</span><span class="s2">:</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;3. Registrar alumno&quot;</span><span class="s2">);</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;4. Registrar profesor&quot;</span><span class="s2">);</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;5. Avanzar semestre&quot;</span><span class="s2">);</span>
+                <span class="s0">break</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s0">int </span><span class="s1">opcion </span><span class="s2">= </span><span class="s1">leerOpcion</span><span class="s2">();</span>
+
+        <span class="s0">switch </span><span class="s2">(</span><span class="s1">opcion</span><span class="s2">) {</span>
+            <span class="s0">case </span><span class="s5">1</span><span class="s2">:</span>
+                <span class="s1">mostrarInformacionPersonal</span><span class="s2">();</span>
+                <span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">case </span><span class="s5">2</span><span class="s2">:</span>
+                <span class="s1">cerrarSesion</span><span class="s2">();</span>
+                <span class="s0">break</span><span class="s2">;</span>
+            <span class="s0">case </span><span class="s5">3</span><span class="s2">:</span>
+                <span class="s4">// ... (lógica para la opción 3 según el rol)</span>
+                <span class="s0">break</span><span class="s2">;</span>
+            <span class="s4">// ... (casos para las demás opciones)</span>
+            <span class="s0">default</span><span class="s2">:</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Opción inválida.&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">mostrarInformacionPersonal</span><span class="s2">() {</span>
+        <span class="s4">// ... (lógica para mostrar la información del usuario)</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">cerrarSesion</span><span class="s2">() {</span>
+        <span class="s4">// ... (lógica para cerrar sesión)</span>
+    <span class="s2">}</span>
+
+    <span class="s4">// ... (otros métodos del menú principal)</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

@@ -2,6 +2,7 @@ package Modelo;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import persistencia.GestorPersistencia;
 import utils.GestorId;
 
 import java.io.IOException;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Semestre {
-
     private int idSemestre;
     private int numeroSemestre; // 1, 2 o 3
     private Carrera carrera;
@@ -90,14 +90,15 @@ public class Semestre {
 
     // Métodos para guardar/cargar semestres en JSON
     public static void guardarSemestres(List<Semestre> semestres, String nombreArchivo) throws IOException {
-        Gson gson = new Gson();
+        Gson gson = GestorPersistencia.getGson();
         String json = gson.toJson(semestres);
         Files.write(Paths.get(nombreArchivo), json.getBytes());
     }
 
     public static List<Semestre> cargarSemestres(String nombreArchivo) throws IOException {
-        Gson gson = new Gson();
+        Gson gson = GestorPersistencia.getGson();
         String json = new String(Files.readAllBytes(Paths.get(nombreArchivo)));
-        return gson.fromJson(json, new TypeToken<List<Semestre>>() {}.getType());
+        return gson.fromJson(json, new TypeToken<List<Semestre>>() {
+        }.getType());
     }
 }

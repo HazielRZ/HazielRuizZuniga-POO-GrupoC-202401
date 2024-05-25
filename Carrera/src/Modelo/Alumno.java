@@ -20,8 +20,8 @@ public class Alumno extends Usuario {
 
     // Constructor
     public Alumno(String nombre, String apellidos, LocalDate fechaNacimiento, String sexo, String ciudad, String estado,
-                  String direccion, Carrera carrera, Semestre semestre, Grupo grupo) {
-        super(nombre, apellidos, fechaNacimiento, sexo, ciudad, estado, direccion, LocalDate.now(), "Alumno");
+                  String direccion, Carrera carrera, Semestre semestre, Grupo grupo, String nombreUsuario, String contrasena) {
+        super(nombre, apellidos, fechaNacimiento, sexo, ciudad, estado, direccion, LocalDate.now(), "Alumno", nombreUsuario, contrasena);
         GestorId gestorId = GestorId.getInstancia();
         this.idUsuario = gestorId.generarIdAlumno();
         this.carrera = carrera;
@@ -123,7 +123,8 @@ public class Alumno extends Usuario {
         try {
             Gson gson = new Gson();
             String json = new String(Files.readAllBytes(Paths.get(nombreArchivo)));
-            return gson.fromJson(json, new TypeToken<List<Alumno>>() {}.getType());
+            return gson.fromJson(json, new TypeToken<List<Alumno>>() {
+            }.getType());
         } catch (IOException e) {
             throw new RuntimeException("Error al cargar alumnos desde JSON: " + e.getMessage());
         }

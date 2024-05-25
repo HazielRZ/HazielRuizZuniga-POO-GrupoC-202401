@@ -1,0 +1,121 @@
+<html>
+<head>
+<title>Calificacion.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Calificacion.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">Modelo</span><span class="s2">;</span>
+
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">gson</span><span class="s2">.</span><span class="s1">Gson</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">gson</span><span class="s2">.</span><span class="s1">reflect</span><span class="s2">.</span><span class="s1">TypeToken</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">IOException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">nio</span><span class="s2">.</span><span class="s1">file</span><span class="s2">.</span><span class="s1">Files</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">nio</span><span class="s2">.</span><span class="s1">file</span><span class="s2">.</span><span class="s1">Paths</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">stream</span><span class="s2">.</span><span class="s1">Collectors</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">Calificacion </span><span class="s2">{</span>
+    <span class="s0">private </span><span class="s1">Alumno alumno</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Materia materia</span><span class="s2">;</span>
+    <span class="s0">private double </span><span class="s1">valor</span><span class="s2">;</span>
+    <span class="s0">private boolean </span><span class="s1">aprobatoria</span><span class="s2">;</span>
+
+    <span class="s3">// Constructor</span>
+    <span class="s0">public </span><span class="s1">Calificacion</span><span class="s2">(</span><span class="s1">Alumno alumno</span><span class="s2">, </span><span class="s1">Materia materia</span><span class="s2">, </span><span class="s0">double </span><span class="s1">valor</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">alumno </span><span class="s2">= </span><span class="s1">alumno</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">materia </span><span class="s2">= </span><span class="s1">materia</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">valor </span><span class="s2">= </span><span class="s1">valor</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">aprobatoria </span><span class="s2">= (</span><span class="s1">valor </span><span class="s2">&gt;= </span><span class="s4">70</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static void </span><span class="s1">crearCalificacion</span><span class="s2">(</span><span class="s1">Calificacion calificacion</span><span class="s2">, </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Calificacion</span><span class="s2">&gt; </span><span class="s1">calificaciones</span><span class="s2">) {</span>
+        <span class="s3">//metodo para guardarla</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Alumno getAlumno</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">alumno</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setAlumno</span><span class="s2">(</span><span class="s1">Alumno alumno</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">alumno </span><span class="s2">= </span><span class="s1">alumno</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Materia getMateria</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">materia</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setMateria</span><span class="s2">(</span><span class="s1">Materia materia</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">materia </span><span class="s2">= </span><span class="s1">materia</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public double </span><span class="s1">getValor</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">valor</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setValor</span><span class="s2">(</span><span class="s0">double </span><span class="s1">valor</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">valor </span><span class="s2">= </span><span class="s1">valor</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">isAprobatoria</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">aprobatoria</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setAprobatoria</span><span class="s2">(</span><span class="s0">boolean </span><span class="s1">aprobatoria</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">aprobatoria </span><span class="s2">= </span><span class="s1">aprobatoria</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// Métodos para guardar/cargar calificaciones en JSON</span>
+    <span class="s0">public static void </span><span class="s1">guardarCalificaciones</span><span class="s2">(</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Calificacion</span><span class="s2">&gt; </span><span class="s1">calificaciones</span><span class="s2">, </span><span class="s1">String nombreArchivo</span><span class="s2">) </span><span class="s0">throws </span><span class="s1">IOException </span><span class="s2">{</span>
+        <span class="s1">Gson gson </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Gson</span><span class="s2">();</span>
+        <span class="s1">String json </span><span class="s2">= </span><span class="s1">gson</span><span class="s2">.</span><span class="s1">toJson</span><span class="s2">(</span><span class="s1">calificaciones</span><span class="s2">);</span>
+        <span class="s1">Files</span><span class="s2">.</span><span class="s1">write</span><span class="s2">(</span><span class="s1">Paths</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">nombreArchivo</span><span class="s2">), </span><span class="s1">json</span><span class="s2">.</span><span class="s1">getBytes</span><span class="s2">());</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Calificacion</span><span class="s2">&gt; </span><span class="s1">cargarCalificaciones</span><span class="s2">(</span><span class="s1">String nombreArchivo</span><span class="s2">) </span><span class="s0">throws </span><span class="s1">IOException </span><span class="s2">{</span>
+        <span class="s1">Gson gson </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Gson</span><span class="s2">();</span>
+        <span class="s1">String json </span><span class="s2">= </span><span class="s0">new </span><span class="s1">String</span><span class="s2">(</span><span class="s1">Files</span><span class="s2">.</span><span class="s1">readAllBytes</span><span class="s2">(</span><span class="s1">Paths</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">nombreArchivo</span><span class="s2">)));</span>
+        <span class="s0">return </span><span class="s1">gson</span><span class="s2">.</span><span class="s1">fromJson</span><span class="s2">(</span><span class="s1">json</span><span class="s2">, </span><span class="s0">new </span><span class="s1">TypeToken</span><span class="s2">&lt;</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Calificacion</span><span class="s2">&gt;&gt;() {</span>
+        <span class="s2">}.</span><span class="s1">getType</span><span class="s2">());</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Calificacion</span><span class="s2">&gt; </span><span class="s1">filtrarPorGrupo</span><span class="s2">(</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Calificacion</span><span class="s2">&gt; </span><span class="s1">calificaciones</span><span class="s2">, </span><span class="s1">Grupo grupo</span><span class="s2">) {</span>
+        <span class="s0">return </span><span class="s1">calificaciones</span><span class="s2">.</span><span class="s1">stream</span><span class="s2">()</span>
+                <span class="s2">.</span><span class="s1">filter</span><span class="s2">(</span><span class="s1">calificacion -&gt; calificacion</span><span class="s2">.</span><span class="s1">getMateria</span><span class="s2">().</span><span class="s1">getGrupo</span><span class="s2">().</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">grupo</span><span class="s2">))</span>
+                <span class="s2">.</span><span class="s1">collect</span><span class="s2">(</span><span class="s1">Collectors</span><span class="s2">.</span><span class="s1">toList</span><span class="s2">());</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Calificacion</span><span class="s2">&gt; </span><span class="s1">filtrarPorMateria</span><span class="s2">(</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Calificacion</span><span class="s2">&gt; </span><span class="s1">calificaciones</span><span class="s2">, </span><span class="s1">Materia materia</span><span class="s2">) {</span>
+        <span class="s0">return </span><span class="s1">calificaciones</span><span class="s2">.</span><span class="s1">stream</span><span class="s2">()</span>
+                <span class="s2">.</span><span class="s1">filter</span><span class="s2">(</span><span class="s1">calificacion -&gt; calificacion</span><span class="s2">.</span><span class="s1">getMateria</span><span class="s2">().</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">materia</span><span class="s2">))</span>
+                <span class="s2">.</span><span class="s1">collect</span><span class="s2">(</span><span class="s1">Collectors</span><span class="s2">.</span><span class="s1">toList</span><span class="s2">());</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Calificacion</span><span class="s2">&gt; </span><span class="s1">filtrarPorSemestre</span><span class="s2">(</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Calificacion</span><span class="s2">&gt; </span><span class="s1">calificaciones</span><span class="s2">, </span><span class="s1">Semestre semestre</span><span class="s2">) {</span>
+        <span class="s0">return </span><span class="s1">calificaciones</span><span class="s2">.</span><span class="s1">stream</span><span class="s2">()</span>
+                <span class="s2">.</span><span class="s1">filter</span><span class="s2">(</span><span class="s1">calificacion -&gt; calificacion</span><span class="s2">.</span><span class="s1">getMateria</span><span class="s2">().</span><span class="s1">getSemestre</span><span class="s2">().</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">semestre</span><span class="s2">))</span>
+                <span class="s2">.</span><span class="s1">collect</span><span class="s2">(</span><span class="s1">Collectors</span><span class="s2">.</span><span class="s1">toList</span><span class="s2">());</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Calificacion</span><span class="s2">&gt; </span><span class="s1">filtrarPorEstado</span><span class="s2">(</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Calificacion</span><span class="s2">&gt; </span><span class="s1">calificaciones</span><span class="s2">, </span><span class="s0">boolean </span><span class="s1">aprobatoria</span><span class="s2">) {</span>
+        <span class="s0">return </span><span class="s1">calificaciones</span><span class="s2">.</span><span class="s1">stream</span><span class="s2">()</span>
+                <span class="s2">.</span><span class="s1">filter</span><span class="s2">(</span><span class="s1">calificacion -&gt; calificacion</span><span class="s2">.</span><span class="s1">isAprobatoria</span><span class="s2">() == </span><span class="s1">aprobatoria</span><span class="s2">)</span>
+                <span class="s2">.</span><span class="s1">collect</span><span class="s2">(</span><span class="s1">Collectors</span><span class="s2">.</span><span class="s1">toList</span><span class="s2">());</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

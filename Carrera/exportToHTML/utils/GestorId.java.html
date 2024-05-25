@@ -1,0 +1,101 @@
+<html>
+<head>
+<title>GestorId.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #7a7e85;}
+.s5 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+GestorId.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">utils</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">gson</span><span class="s2">.</span><span class="s1">Gson</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">IOException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">nio</span><span class="s2">.</span><span class="s1">file</span><span class="s2">.</span><span class="s1">Files</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">nio</span><span class="s2">.</span><span class="s1">file</span><span class="s2">.</span><span class="s1">Paths</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">GestorId </span><span class="s2">{</span>
+
+    <span class="s0">private int </span><span class="s1">contadorCarreras </span><span class="s2">= </span><span class="s3">1</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">contadorSemestres </span><span class="s2">= </span><span class="s3">1</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">contadorGrupos </span><span class="s2">= </span><span class="s3">1</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">contadorMaterias </span><span class="s2">= </span><span class="s3">1</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">contadorAlumnos </span><span class="s2">= </span><span class="s3">1</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">contadorProfesores </span><span class="s2">= </span><span class="s3">1</span><span class="s2">;</span>
+
+    <span class="s4">// Singleton para asegurar una única instancia del utils.GestorId</span>
+    <span class="s0">private static </span><span class="s1">GestorId instancia </span><span class="s2">= </span><span class="s0">null</span><span class="s2">;</span>
+
+    <span class="s0">private </span><span class="s1">GestorId</span><span class="s2">() {</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static </span><span class="s1">GestorId getInstancia</span><span class="s2">() {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">instancia </span><span class="s2">== </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">instancia </span><span class="s2">= </span><span class="s0">new </span><span class="s1">GestorId</span><span class="s2">();</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">instancia</span><span class="s2">.</span><span class="s1">cargarContadores</span><span class="s2">(</span><span class="s5">&quot;contadores.json&quot;</span><span class="s2">); </span><span class="s4">// Intenta cargar los contadores al inicio</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">IOException e</span><span class="s2">) {</span>
+                <span class="s4">// Si el archivo no existe, se usarán los valores iniciales de los contadores</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s5">&quot;No se pudieron cargar los contadores: &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">());</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">instancia</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s4">// Métodos para generar IDs</span>
+    <span class="s0">public int </span><span class="s1">generarIdCarrera</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">contadorCarreras</span><span class="s2">++;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public int </span><span class="s1">generarIdSemestre</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">contadorSemestres</span><span class="s2">++;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public int </span><span class="s1">generarIdGrupo</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">contadorGrupos</span><span class="s2">++;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public int </span><span class="s1">generarIdMateria</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">contadorMaterias</span><span class="s2">++;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public int </span><span class="s1">generarIdAlumno</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">contadorAlumnos</span><span class="s2">++;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public int </span><span class="s1">generarIdProfesor</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">contadorProfesores</span><span class="s2">++;</span>
+    <span class="s2">}</span>
+
+    <span class="s4">// Métodos para guardar/cargar contadores desde/hacia JSON</span>
+    <span class="s0">public void </span><span class="s1">guardarContadores</span><span class="s2">(</span><span class="s1">String nombreArchivo</span><span class="s2">) </span><span class="s0">throws </span><span class="s1">IOException </span><span class="s2">{</span>
+        <span class="s1">Gson gson </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Gson</span><span class="s2">();</span>
+        <span class="s1">String json </span><span class="s2">= </span><span class="s1">gson</span><span class="s2">.</span><span class="s1">toJson</span><span class="s2">(</span><span class="s0">this</span><span class="s2">);</span>
+        <span class="s1">Files</span><span class="s2">.</span><span class="s1">write</span><span class="s2">(</span><span class="s1">Paths</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">nombreArchivo</span><span class="s2">), </span><span class="s1">json</span><span class="s2">.</span><span class="s1">getBytes</span><span class="s2">());</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">cargarContadores</span><span class="s2">(</span><span class="s1">String nombreArchivo</span><span class="s2">) </span><span class="s0">throws </span><span class="s1">IOException </span><span class="s2">{</span>
+        <span class="s1">Gson gson </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Gson</span><span class="s2">();</span>
+        <span class="s1">String json </span><span class="s2">= </span><span class="s0">new </span><span class="s1">String</span><span class="s2">(</span><span class="s1">Files</span><span class="s2">.</span><span class="s1">readAllBytes</span><span class="s2">(</span><span class="s1">Paths</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">nombreArchivo</span><span class="s2">)));</span>
+        <span class="s1">GestorId datos </span><span class="s2">= </span><span class="s1">gson</span><span class="s2">.</span><span class="s1">fromJson</span><span class="s2">(</span><span class="s1">json</span><span class="s2">, </span><span class="s1">GestorId</span><span class="s2">.</span><span class="s0">class</span><span class="s2">);</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">contadorCarreras </span><span class="s2">= </span><span class="s1">datos</span><span class="s2">.</span><span class="s1">contadorCarreras</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">contadorSemestres </span><span class="s2">= </span><span class="s1">datos</span><span class="s2">.</span><span class="s1">contadorSemestres</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">contadorGrupos </span><span class="s2">= </span><span class="s1">datos</span><span class="s2">.</span><span class="s1">contadorGrupos</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">contadorMaterias </span><span class="s2">= </span><span class="s1">datos</span><span class="s2">.</span><span class="s1">contadorMaterias</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">contadorAlumnos </span><span class="s2">= </span><span class="s1">datos</span><span class="s2">.</span><span class="s1">contadorAlumnos</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">contadorProfesores </span><span class="s2">= </span><span class="s1">datos</span><span class="s2">.</span><span class="s1">contadorProfesores</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

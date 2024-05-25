@@ -1,0 +1,150 @@
+<html>
+<head>
+<title>Carrera.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #2aacb8;}
+.s5 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Carrera.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">Modelo</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">gson</span><span class="s2">.</span><span class="s1">Gson</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">gson</span><span class="s2">.</span><span class="s1">reflect</span><span class="s2">.</span><span class="s1">TypeToken</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">utils</span><span class="s2">.</span><span class="s1">GestorId</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">IOException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">nio</span><span class="s2">.</span><span class="s1">file</span><span class="s2">.</span><span class="s1">Files</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">nio</span><span class="s2">.</span><span class="s1">file</span><span class="s2">.</span><span class="s1">Paths</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">time</span><span class="s2">.</span><span class="s1">LocalDate</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">HashMap</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Map</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">Carrera </span><span class="s2">{</span>
+
+    <span class="s0">private int </span><span class="s1">idCarrera</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String nombre</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">cantidadGrupos</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">cantidadAlumnos</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">cantidadMaterias</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">LocalDate fechaCreacion</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Coordinador coordinador</span><span class="s2">;</span>
+
+    <span class="s3">// Constructor</span>
+    <span class="s0">public </span><span class="s1">Carrera</span><span class="s2">(</span><span class="s1">String nombre</span><span class="s2">, </span><span class="s1">Coordinador coordinador</span><span class="s2">) {</span>
+        <span class="s1">GestorId gestorId </span><span class="s2">= </span><span class="s1">GestorId</span><span class="s2">.</span><span class="s1">getInstancia</span><span class="s2">();</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">idCarrera </span><span class="s2">= </span><span class="s1">gestorId</span><span class="s2">.</span><span class="s1">generarIdCarrera</span><span class="s2">();</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">nombre </span><span class="s2">= </span><span class="s1">nombre</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">cantidadGrupos </span><span class="s2">= </span><span class="s4">0</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">cantidadAlumnos </span><span class="s2">= </span><span class="s4">0</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">cantidadMaterias </span><span class="s2">= </span><span class="s4">0</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">fechaCreacion </span><span class="s2">= </span><span class="s1">LocalDate</span><span class="s2">.</span><span class="s1">now</span><span class="s2">();</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">coordinador </span><span class="s2">= </span><span class="s1">coordinador</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public int </span><span class="s1">getIdCarrera</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">idCarrera</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setIdCarrera</span><span class="s2">(</span><span class="s0">int </span><span class="s1">idCarrera</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">idCarrera </span><span class="s2">= </span><span class="s1">idCarrera</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getNombre</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">nombre</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setNombre</span><span class="s2">(</span><span class="s1">String nombre</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">nombre </span><span class="s2">= </span><span class="s1">nombre</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public int </span><span class="s1">getCantidadGrupos</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">cantidadGrupos</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setCantidadGrupos</span><span class="s2">(</span><span class="s0">int </span><span class="s1">cantidadGrupos</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">cantidadGrupos </span><span class="s2">= </span><span class="s1">cantidadGrupos</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public int </span><span class="s1">getCantidadAlumnos</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">cantidadAlumnos</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setCantidadAlumnos</span><span class="s2">(</span><span class="s0">int </span><span class="s1">cantidadAlumnos</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">cantidadAlumnos </span><span class="s2">= </span><span class="s1">cantidadAlumnos</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public int </span><span class="s1">getCantidadMaterias</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">cantidadMaterias</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setCantidadMaterias</span><span class="s2">(</span><span class="s0">int </span><span class="s1">cantidadMaterias</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">cantidadMaterias </span><span class="s2">= </span><span class="s1">cantidadMaterias</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">LocalDate getFechaCreacion</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">fechaCreacion</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setFechaCreacion</span><span class="s2">(</span><span class="s1">LocalDate fechaCreacion</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">fechaCreacion </span><span class="s2">= </span><span class="s1">fechaCreacion</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Coordinador getCoordinador</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">coordinador</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setCoordinador</span><span class="s2">(</span><span class="s1">Coordinador coordinador</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">coordinador </span><span class="s2">= </span><span class="s1">coordinador</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// Métodos para guardar/cargar carreras en JSON</span>
+    <span class="s0">public static void </span><span class="s1">guardarCarreras</span><span class="s2">(</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Carrera</span><span class="s2">&gt; </span><span class="s1">carreras</span><span class="s2">, </span><span class="s1">String nombreArchivo</span><span class="s2">) </span><span class="s0">throws </span><span class="s1">IOException </span><span class="s2">{</span>
+        <span class="s1">Gson gson </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Gson</span><span class="s2">();</span>
+        <span class="s1">String json </span><span class="s2">= </span><span class="s1">gson</span><span class="s2">.</span><span class="s1">toJson</span><span class="s2">(</span><span class="s1">carreras</span><span class="s2">);</span>
+        <span class="s1">Files</span><span class="s2">.</span><span class="s1">write</span><span class="s2">(</span><span class="s1">Paths</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">nombreArchivo</span><span class="s2">), </span><span class="s1">json</span><span class="s2">.</span><span class="s1">getBytes</span><span class="s2">());</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Carrera</span><span class="s2">&gt; </span><span class="s1">cargarCarreras</span><span class="s2">(</span><span class="s1">String nombreArchivo</span><span class="s2">) </span><span class="s0">throws </span><span class="s1">IOException </span><span class="s2">{</span>
+        <span class="s1">Gson gson </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Gson</span><span class="s2">();</span>
+        <span class="s1">String json </span><span class="s2">= </span><span class="s0">new </span><span class="s1">String</span><span class="s2">(</span><span class="s1">Files</span><span class="s2">.</span><span class="s1">readAllBytes</span><span class="s2">(</span><span class="s1">Paths</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">nombreArchivo</span><span class="s2">)));</span>
+        <span class="s0">return </span><span class="s1">gson</span><span class="s2">.</span><span class="s1">fromJson</span><span class="s2">(</span><span class="s1">json</span><span class="s2">, </span><span class="s0">new </span><span class="s1">TypeToken</span><span class="s2">&lt;</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Carrera</span><span class="s2">&gt;&gt;() {</span>
+        <span class="s2">}.</span><span class="s1">getType</span><span class="s2">());</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// Validaciones (puedes agregar más según tus necesidades)</span>
+    <span class="s0">public boolean </span><span class="s1">validarIdUnico</span><span class="s2">(</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Carrera</span><span class="s2">&gt; </span><span class="s1">carreras</span><span class="s2">) {</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">Carrera carrera </span><span class="s2">: </span><span class="s1">carreras</span><span class="s2">) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">carrera</span><span class="s2">.</span><span class="s1">getIdCarrera</span><span class="s2">() == </span><span class="s0">this</span><span class="s2">.</span><span class="s1">idCarrera</span><span class="s2">) {</span>
+                <span class="s0">return false</span><span class="s2">; </span><span class="s3">// ID duplicado</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return true</span><span class="s2">; </span><span class="s3">// ID único</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private static final </span><span class="s1">Map</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">, </span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">ABREVIATURAS </span><span class="s2">= </span><span class="s0">new </span><span class="s1">HashMap</span><span class="s2">&lt;&gt;();</span>
+
+    <span class="s0">static </span><span class="s2">{</span>
+        <span class="s1">ABREVIATURAS</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s5">&quot;Ingeniería en Sistemas Computacionales&quot;</span><span class="s2">, </span><span class="s5">&quot;ISC&quot;</span><span class="s2">);</span>
+        <span class="s1">ABREVIATURAS</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s5">&quot;Ingeniería en Materiales&quot;</span><span class="s2">, </span><span class="s5">&quot;IMAT&quot;</span><span class="s2">);</span>
+        <span class="s1">ABREVIATURAS</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s5">&quot;Ingeniería Electrónica&quot;</span><span class="s2">, </span><span class="s5">&quot;ELC&quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getAbreviatura</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">ABREVIATURAS</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s0">this</span><span class="s2">.</span><span class="s1">nombre</span><span class="s2">);</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

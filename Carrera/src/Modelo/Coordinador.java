@@ -3,6 +3,7 @@ package Modelo;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import persistencia.GestorPersistencia;
 import utils.GestorId;
 
 import java.io.IOException;
@@ -16,8 +17,8 @@ public class Coordinador extends Empleado {
 
     // Constructor
     public Coordinador(String nombre, String apellidos, LocalDate fechaNacimiento, String sexo, String ciudad, String estado,
-                       String direccion, double sueldo, Carrera carrera) {
-        super(nombre, apellidos, fechaNacimiento, sexo, ciudad, estado, direccion, LocalDate.now(), "Coordinador", sueldo);
+                       String direccion, double sueldo, Carrera carrera,String nombreUsuario, String contrasena) {
+        super(nombre, apellidos, fechaNacimiento, sexo, ciudad, estado, direccion, LocalDate.now(), "Coordinador",nombreUsuario, contrasena, sueldo);
         GestorId gestorId = GestorId.getInstancia();
         this.idUsuario = gestorId.generarIdProfesor();
         this.carrera = carrera;
@@ -49,7 +50,7 @@ public class Coordinador extends Empleado {
     // Método para guardar/cargar coordinadores en JSON
     public static void guardarCoordinadores(List<Coordinador> coordinadores, String nombreArchivo) {
         try {
-            Gson gson = new Gson();
+            Gson gson = GestorPersistencia.getGson();
             String json = gson.toJson(coordinadores);
             Files.write(Paths.get(nombreArchivo), json.getBytes());
         } catch (IOException e) {
@@ -59,9 +60,10 @@ public class Coordinador extends Empleado {
 
     public static List<Coordinador> cargarCoordinadores(String nombreArchivo) {
         try {
-            Gson gson = new Gson();
+            Gson gson = GestorPersistencia.getGson();
             String json = new String(Files.readAllBytes(Paths.get(nombreArchivo)));
-            return gson.fromJson(json, new TypeToken<List<Coordinador>>() {}.getType());
+            return gson.fromJson(json, new TypeToken<List<Coordinador>>() {
+            }.getType());
         } catch (IOException e) {
             throw new RuntimeException("Error al cargar coordinadores desde JSON: " + e.getMessage());
         }
@@ -69,7 +71,7 @@ public class Coordinador extends Empleado {
 
     // Validaciones
     public boolean validar(List<Coordinador> coordinadores) {
-        return validarCarreraUnica(coordinadores) ; // Validar
+        return validarCarreraUnica(coordinadores); // Validar
     }
 
     private boolean validarCarreraUnica(List<Coordinador> coordinadores) {

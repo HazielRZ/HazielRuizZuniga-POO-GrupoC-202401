@@ -18,7 +18,8 @@ public class GestorId {
     // Singleton para asegurar una única instancia del utils.GestorId
     private static GestorId instancia = null;
 
-    private GestorId() {}
+    private GestorId() {
+    }
 
     public static GestorId getInstancia() {
         if (instancia == null) {

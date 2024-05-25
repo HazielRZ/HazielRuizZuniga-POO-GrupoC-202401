@@ -1,8 +1,10 @@
 package Modelo;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
 import com.google.gson.reflect.TypeToken;
 import utils.GestorId;
+import persistencia.GestorPersistencia;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,6 +21,7 @@ public class Carrera {
     private int cantidadGrupos;
     private int cantidadAlumnos;
     private int cantidadMaterias;
+
     private LocalDate fechaCreacion;
     private Coordinador coordinador;
 
@@ -92,15 +95,16 @@ public class Carrera {
 
     // Métodos para guardar/cargar carreras en JSON
     public static void guardarCarreras(List<Carrera> carreras, String nombreArchivo) throws IOException {
-        Gson gson = new Gson();
+        Gson gson = GestorPersistencia.getGson();
         String json = gson.toJson(carreras);
         Files.write(Paths.get(nombreArchivo), json.getBytes());
     }
 
     public static List<Carrera> cargarCarreras(String nombreArchivo) throws IOException {
-        Gson gson = new Gson();
+        Gson gson = GestorPersistencia.getGson();
         String json = new String(Files.readAllBytes(Paths.get(nombreArchivo)));
-        return gson.fromJson(json, new TypeToken<List<Carrera>>() {}.getType());
+        return gson.fromJson(json, new TypeToken<List<Carrera>>() {
+        }.getType());
     }
 
     // Validaciones (puedes agregar más según tus necesidades)

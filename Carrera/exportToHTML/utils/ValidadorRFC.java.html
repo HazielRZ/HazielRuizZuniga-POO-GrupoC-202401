@@ -1,0 +1,119 @@
+<html>
+<head>
+<title>ValidadorRFC.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ValidadorRFC.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">utils</span><span class="s2">;</span>
+
+
+<span class="s0">import </span><span class="s1">Modelo</span><span class="s2">.</span><span class="s1">Empleado</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">time</span><span class="s2">.</span><span class="s1">LocalDate</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">time</span><span class="s2">.</span><span class="s1">format</span><span class="s2">.</span><span class="s1">DateTimeFormatter</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">HashMap</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Map</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Random</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">ValidadorRFC </span><span class="s2">{</span>
+
+    <span class="s0">private static final </span><span class="s1">Map</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">, </span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">CLAVES_ENTIDADES </span><span class="s2">= </span><span class="s0">new </span><span class="s1">HashMap</span><span class="s2">&lt;&gt;();</span>
+    <span class="s0">private static final </span><span class="s1">String HOMOCLAVE_CHARS </span><span class="s2">= </span><span class="s3">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&quot;</span><span class="s2">;</span>
+
+    <span class="s0">static </span><span class="s2">{</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;AGUASCALIENTES&quot;</span><span class="s2">, </span><span class="s3">&quot;AS&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;BAJA CALIFORNIA&quot;</span><span class="s2">, </span><span class="s3">&quot;BC&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;BAJA CALIFORNIA SUR&quot;</span><span class="s2">, </span><span class="s3">&quot;BS&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;CAMPECHE&quot;</span><span class="s2">, </span><span class="s3">&quot;CC&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;COAHUILA&quot;</span><span class="s2">, </span><span class="s3">&quot;CL&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;COLIMA&quot;</span><span class="s2">, </span><span class="s3">&quot;CM&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;CHIAPAS&quot;</span><span class="s2">, </span><span class="s3">&quot;CS&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;CHIHUAHUA&quot;</span><span class="s2">, </span><span class="s3">&quot;CH&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;CIUDAD DE MÉXICO&quot;</span><span class="s2">, </span><span class="s3">&quot;DF&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;DURANGO&quot;</span><span class="s2">, </span><span class="s3">&quot;DG&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;GUANAJUATO&quot;</span><span class="s2">, </span><span class="s3">&quot;GT&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;GUERRERO&quot;</span><span class="s2">, </span><span class="s3">&quot;GR&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;HIDALGO&quot;</span><span class="s2">, </span><span class="s3">&quot;HG&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;JALISCO&quot;</span><span class="s2">, </span><span class="s3">&quot;JC&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;MÉXICO&quot;</span><span class="s2">, </span><span class="s3">&quot;MC&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;MICHOACÁN&quot;</span><span class="s2">, </span><span class="s3">&quot;MN&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;MORELOS&quot;</span><span class="s2">, </span><span class="s3">&quot;MS&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;NAYARIT&quot;</span><span class="s2">, </span><span class="s3">&quot;NT&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;NUEVO LEÓN&quot;</span><span class="s2">, </span><span class="s3">&quot;NL&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;OAXACA&quot;</span><span class="s2">, </span><span class="s3">&quot;OC&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;PUEBLA&quot;</span><span class="s2">, </span><span class="s3">&quot;PL&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;QUERÉTARO&quot;</span><span class="s2">, </span><span class="s3">&quot;QT&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;QUINTANA ROO&quot;</span><span class="s2">, </span><span class="s3">&quot;QR&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;SAN LUIS POTOSÍ&quot;</span><span class="s2">, </span><span class="s3">&quot;SP&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;SINALOA&quot;</span><span class="s2">, </span><span class="s3">&quot;SL&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;SONORA&quot;</span><span class="s2">, </span><span class="s3">&quot;SR&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;TABASCO&quot;</span><span class="s2">, </span><span class="s3">&quot;TC&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;TAMAULIPAS&quot;</span><span class="s2">, </span><span class="s3">&quot;TS&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;TLAXCALA&quot;</span><span class="s2">, </span><span class="s3">&quot;TL&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;VERACRUZ&quot;</span><span class="s2">, </span><span class="s3">&quot;VZ&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;YUCATÁN&quot;</span><span class="s2">, </span><span class="s3">&quot;YN&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;ZACATECAS&quot;</span><span class="s2">, </span><span class="s3">&quot;ZS&quot;</span><span class="s2">);</span>
+        <span class="s1">CLAVES_ENTIDADES</span><span class="s2">.</span><span class="s1">put</span><span class="s2">(</span><span class="s3">&quot;NACIDO EXTRANJERO&quot;</span><span class="s2">, </span><span class="s3">&quot;NE&quot;</span><span class="s2">);</span>
+        <span class="s4">// ... (Agregar las claves de las entidades federativas, igual que en ValidadorCURP)</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static </span><span class="s1">String generarRFC</span><span class="s2">(</span><span class="s1">Empleado empleado</span><span class="s2">) {</span>
+        <span class="s1">String nombre </span><span class="s2">= </span><span class="s1">limpiarNombre</span><span class="s2">(</span><span class="s1">empleado</span><span class="s2">.</span><span class="s1">getNombre</span><span class="s2">());</span>
+        <span class="s1">String apellidoPaterno </span><span class="s2">= </span><span class="s1">limpiarNombre</span><span class="s2">(</span><span class="s1">empleado</span><span class="s2">.</span><span class="s1">getApellidos</span><span class="s2">().</span><span class="s1">split</span><span class="s2">(</span><span class="s3">&quot; &quot;</span><span class="s2">)[</span><span class="s5">0</span><span class="s2">]);</span>
+        <span class="s1">String apellidoMaterno </span><span class="s2">= </span><span class="s1">empleado</span><span class="s2">.</span><span class="s1">getApellidos</span><span class="s2">().</span><span class="s1">split</span><span class="s2">(</span><span class="s3">&quot; &quot;</span><span class="s2">).</span><span class="s1">length </span><span class="s2">&gt; </span><span class="s5">1 </span><span class="s2">? </span><span class="s1">limpiarNombre</span><span class="s2">(</span><span class="s1">empleado</span><span class="s2">.</span><span class="s1">getApellidos</span><span class="s2">().</span><span class="s1">split</span><span class="s2">(</span><span class="s3">&quot; &quot;</span><span class="s2">)[</span><span class="s5">1</span><span class="s2">]) : </span><span class="s3">&quot;&quot;</span><span class="s2">;</span>
+        <span class="s1">LocalDate fechaNacimiento </span><span class="s2">= </span><span class="s1">empleado</span><span class="s2">.</span><span class="s1">getFechaNacimiento</span><span class="s2">();</span>
+
+        <span class="s1">String fechaNacimientoStr </span><span class="s2">= </span><span class="s1">fechaNacimiento</span><span class="s2">.</span><span class="s1">format</span><span class="s2">(</span><span class="s1">DateTimeFormatter</span><span class="s2">.</span><span class="s1">ofPattern</span><span class="s2">(</span><span class="s3">&quot;yyMMdd&quot;</span><span class="s2">));</span>
+        <span class="s1">String rfcBase </span><span class="s2">= </span><span class="s1">apellidoPaterno</span><span class="s2">.</span><span class="s1">substring</span><span class="s2">(</span><span class="s5">0</span><span class="s2">, </span><span class="s5">2</span><span class="s2">) + </span><span class="s1">apellidoMaterno</span><span class="s2">.</span><span class="s1">charAt</span><span class="s2">(</span><span class="s5">0</span><span class="s2">) + </span><span class="s1">nombre</span><span class="s2">.</span><span class="s1">charAt</span><span class="s2">(</span><span class="s5">0</span><span class="s2">) + </span><span class="s1">fechaNacimientoStr</span><span class="s2">;</span>
+
+        <span class="s1">String homoclave </span><span class="s2">= </span><span class="s1">generarHomoclaveRFC</span><span class="s2">(</span><span class="s1">rfcBase</span><span class="s2">);</span>
+        <span class="s0">return </span><span class="s1">rfcBase </span><span class="s2">+ </span><span class="s1">homoclave</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static boolean </span><span class="s1">validarRFC</span><span class="s2">(</span><span class="s1">String rfc</span><span class="s2">) {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">rfc </span><span class="s2">== </span><span class="s0">null </span><span class="s2">|| </span><span class="s1">rfc</span><span class="s2">.</span><span class="s1">length</span><span class="s2">() != </span><span class="s5">12 </span><span class="s2">&amp;&amp; </span><span class="s1">rfc</span><span class="s2">.</span><span class="s1">length</span><span class="s2">() != </span><span class="s5">13</span><span class="s2">) {</span>
+            <span class="s0">return false</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s1">String rfcPattern </span><span class="s2">= </span><span class="s3">&quot;^[A-Z&amp;Ñ]{3,4}</span><span class="s0">\\</span><span class="s3">d{6}[A-Z0-9]{3}$&quot;</span><span class="s2">;</span>
+        <span class="s0">return </span><span class="s1">rfc</span><span class="s2">.</span><span class="s1">matches</span><span class="s2">(</span><span class="s1">rfcPattern</span><span class="s2">);</span>
+
+        <span class="s4">// Verificar dígito verificador (lógica más compleja que requiere tabla del SAT)</span>
+        <span class="s4">// ... (implementar la lógica de verificación del dígito verificador)</span>
+<span class="s4">// Temporalmente, asume que el RFC es válido</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private static </span><span class="s1">String generarHomoclaveRFC</span><span class="s2">(</span><span class="s1">String rfcBase</span><span class="s2">) {</span>
+
+        <span class="s4">//  generar una homoclave aleatoria de 3 caracteres</span>
+        <span class="s1">Random random </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Random</span><span class="s2">();</span>
+        <span class="s1">StringBuilder homoclave </span><span class="s2">= </span><span class="s0">new </span><span class="s1">StringBuilder</span><span class="s2">();</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s5">3</span><span class="s2">; </span><span class="s1">i</span><span class="s2">++) {</span>
+            <span class="s1">homoclave</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">HOMOCLAVE_CHARS</span><span class="s2">.</span><span class="s1">charAt</span><span class="s2">(</span><span class="s1">random</span><span class="s2">.</span><span class="s1">nextInt</span><span class="s2">(</span><span class="s1">HOMOCLAVE_CHARS</span><span class="s2">.</span><span class="s1">length</span><span class="s2">())));</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">homoclave</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private static </span><span class="s1">String limpiarNombre</span><span class="s2">(</span><span class="s1">String nombre</span><span class="s2">) {</span>
+        <span class="s1">nombre </span><span class="s2">= </span><span class="s1">nombre</span><span class="s2">.</span><span class="s1">toUpperCase</span><span class="s2">().</span><span class="s1">trim</span><span class="s2">();</span>
+        <span class="s1">nombre </span><span class="s2">= </span><span class="s1">nombre</span><span class="s2">.</span><span class="s1">replaceAll</span><span class="s2">(</span><span class="s3">&quot;[^A-ZÑ]&quot;</span><span class="s2">, </span><span class="s3">&quot;&quot;</span><span class="s2">);</span>
+        <span class="s0">return </span><span class="s1">nombre</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

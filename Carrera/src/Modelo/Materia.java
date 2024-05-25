@@ -2,8 +2,8 @@ package Modelo;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import persistencia.GestorPersistencia;
 import utils.GestorId;
-
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,15 +17,17 @@ public class Materia {
     private Carrera carrera;
     private Grupo grupo;
     private Profesor profesor;
+    private Semestre semestre; // Nuevo atributo
 
     // Constructor
-    public Materia(String nombre, Carrera carrera, Grupo grupo, Profesor profesor) {
+    public Materia(String nombre, Carrera carrera, Grupo grupo, Profesor profesor, Semestre semestre) {
         GestorId gestorId = GestorId.getInstancia();
         this.idMateria = gestorId.generarIdMateria();
         this.nombre = nombre;
         this.carrera = carrera;
         this.grupo = grupo;
         this.profesor = profesor;
+        this.semestre = semestre; // Asignar el semestre
     }
 
     public int getIdMateria() {
@@ -68,17 +70,26 @@ public class Materia {
         this.profesor = profesor;
     }
 
+    public Semestre getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(Semestre semestre) {
+        this.semestre = semestre;
+    }
+
     // Métodos para guardar/cargar materias en JSON
     public static void guardarMaterias(List<Materia> materias, String nombreArchivo) throws IOException {
-        Gson gson = new Gson();
+        Gson gson = GestorPersistencia.getGson();
         String json = gson.toJson(materias);
         Files.write(Paths.get(nombreArchivo), json.getBytes());
     }
 
     public static List<Materia> cargarMaterias(String nombreArchivo) throws IOException {
-        Gson gson = new Gson();
+        Gson gson = GestorPersistencia.getGson();
         String json = new String(Files.readAllBytes(Paths.get(nombreArchivo)));
-        return gson.fromJson(json, new TypeToken<List<Materia>>() {}.getType());
+        return gson.fromJson(json, new TypeToken<List<Materia>>() {
+        }.getType());
     }
 
     // Validaciones (puedes agregar más según tus necesidades)

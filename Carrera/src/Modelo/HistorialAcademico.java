@@ -2,6 +2,7 @@ package Modelo;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import persistencia.GestorPersistencia;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -42,15 +43,16 @@ public class HistorialAcademico {
 
     // Método para guardar/cargar historiales en JSON
     public static void guardarHistoriales(List<HistorialAcademico> historiales, String nombreArchivo) throws IOException {
-        Gson gson = new Gson();
+        Gson gson = GestorPersistencia.getGson();
         String json = gson.toJson(historiales);
         Files.write(Paths.get(nombreArchivo), json.getBytes());
     }
 
     public static List<HistorialAcademico> cargarHistoriales(String nombreArchivo) throws IOException {
-        Gson gson = new Gson();
+        Gson gson = GestorPersistencia.getGson();
         String json = new String(Files.readAllBytes(Paths.get(nombreArchivo)));
-        return gson.fromJson(json, new TypeToken<List<HistorialAcademico>>() {}.getType());
+        return gson.fromJson(json, new TypeToken<List<HistorialAcademico>>() {
+        }.getType());
     }
 
     // Clase interna para representar un registro semestral

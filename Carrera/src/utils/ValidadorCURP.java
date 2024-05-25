@@ -97,6 +97,7 @@ public class ValidadorCURP {
         }
         return digitoVerificador == (curp.charAt(17) - '0');
     }
+
     private static String limpiarNombre(String nombre) {
         nombre = nombre.toUpperCase().trim();
         nombre = nombre.replaceAll("[^A-ZÑ]", "");

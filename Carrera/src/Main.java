@@ -1,16 +1,29 @@
-
+import Fachada.Fachada;
+import InicioSesion.InicioSesion;
 import Modelo.Carrera;
 import Modelo.Coordinador;
+import Modelo.Usuario;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.IOException;
+import java.util.Scanner;
+
 
 public class Main {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese su nombre de usuario: ");
+        scanner.nextLine();
+        String nombreUsuario;
+        System.out.print("Ingrese su contraseña: ");
+        scanner.nextLine();
+        String contrasena;
+
+        Fachada fachada = new Fachada(); // Crear la fachada
         // ... (cargar carreras desde JSON)
         List<Carrera> carreras = new ArrayList<>();
 
@@ -40,15 +53,15 @@ public class Main {
         // Crear coordinadores de ejemplo
         Coordinador coordinadorISC = new Coordinador(
                 "José Manuel", "Cuin Jacuinde", LocalDate.parse("1980-05-12"), "M", "Morelia", "MICHOACÁN",
-                "Av. Tecnológico 1500", 50000.0, carreras.get(0) // ISC
+                "Av. Tecnológico 1500", 50000.0, carreras.get(0),"jmcuin", "123" // ISC
         );
         Coordinador coordinadorELC = new Coordinador(
                 "Eder", "Rivera Cisneros", LocalDate.parse("1985-08-22"), "M", "Morelia", "MICHOACÁN",
-                "Calle Revolución 320", 48000.0, carreras.get(1) // ELC
+                "Calle Revolución 320", 48000.0, carreras.get(1),"Edriv", "123" // ELC
         );
         Coordinador coordinadorIMAT = new Coordinador(
                 "Juvenal", "Maldonado Pérez", LocalDate.parse("1978-03-18"), "M", "Morelia", "MICHOACÁN",
-                "Blvd. García de León 789", 52000.0, carreras.get(2) // IMAT
+                "Blvd. García de León 789", 52000.0, carreras.get(2),"Jvmp", "123" // IMAT
         );
 
         coordinadores.add(coordinadorISC);
@@ -58,6 +71,37 @@ public class Main {
         // Guardar coordinadores en JSON
         Coordinador.guardarCoordinadores(coordinadores, "coordinadores.json");
 
-        // ... (resto del programa)
+        while (true) { // Bucle para mantener el menú activo hasta que el usuario cierre sesión
+            System.out.print("Ingrese su nombre de usuario (o '2' para terminar): ");
+             nombreUsuario = scanner.nextLine();
+
+            if (nombreUsuario.equalsIgnoreCase("2")) {
+                break; // Salir del programa
+            }
+
+            System.out.print("Ingrese su contraseña: ");
+             contrasena = scanner.nextLine();
+
+            try {
+                InicioSesion inicioSesion = new InicioSesion(fachada.obtenerAlumnos(), fachada.obtenerProfesores(), fachada.obtenerCoordinadores());
+                Usuario usuarioActual = inicioSesion.iniciarSesion(nombreUsuario, contrasena);
+
+                if (usuarioActual != null) {
+                    fachada.setUsuarioActual(usuarioActual);
+                    MenuPrincipal menuPrincipal = new MenuPrincipal(fachada, usuarioActual); // Pasar el usuarioActual
+                    menuPrincipal.mostrar();
+
+                    fachada.setUsuarioActual(null);
+                } else {
+                    System.out.println("Credenciales incorrectas. Intente nuevamente.");
+                }
+            } catch (RuntimeException e) {
+                System.err.println("Error durante el inicio de sesión: " + e.getMessage());
+            }
+        }
+
+        scanner.close();
     }
+
 }
+

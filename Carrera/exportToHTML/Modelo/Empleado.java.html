@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>Empleado.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Empleado.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">Modelo</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">utils</span><span class="s2">.</span><span class="s1">ValidadorRFC</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">time</span><span class="s2">.</span><span class="s1">LocalDate</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ArrayList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">Empleado </span><span class="s0">extends </span><span class="s1">Usuario </span><span class="s2">{</span>
+    <span class="s0">protected </span><span class="s1">String rfc</span><span class="s2">;</span>
+    <span class="s0">protected </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Materia</span><span class="s2">&gt; </span><span class="s1">materiasImpartidas</span><span class="s2">;</span>
+    <span class="s0">protected double </span><span class="s1">sueldo</span><span class="s2">;</span>
+
+    <span class="s3">// Constructor</span>
+    <span class="s0">public </span><span class="s1">Empleado</span><span class="s2">(</span><span class="s1">String nombre</span><span class="s2">, </span><span class="s1">String apellidos</span><span class="s2">, </span><span class="s1">LocalDate fechaNacimiento</span><span class="s2">, </span><span class="s1">String sexo</span><span class="s2">, </span><span class="s1">String ciudad</span><span class="s2">, </span><span class="s1">String estado</span><span class="s2">,</span>
+                    <span class="s1">String direccion</span><span class="s2">, </span><span class="s1">LocalDate fechaRegistro</span><span class="s2">, </span><span class="s1">String rol</span><span class="s2">, </span><span class="s0">double </span><span class="s1">sueldo</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">(</span><span class="s1">nombre</span><span class="s2">, </span><span class="s1">apellidos</span><span class="s2">, </span><span class="s1">fechaNacimiento</span><span class="s2">, </span><span class="s1">sexo</span><span class="s2">, </span><span class="s1">ciudad</span><span class="s2">, </span><span class="s1">estado</span><span class="s2">, </span><span class="s1">direccion</span><span class="s2">, </span><span class="s1">fechaRegistro</span><span class="s2">, </span><span class="s1">rol</span><span class="s2">);</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">sueldo </span><span class="s2">= </span><span class="s1">sueldo</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">materiasImpartidas </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">rfc </span><span class="s2">= </span><span class="s1">ValidadorRFC</span><span class="s2">.</span><span class="s1">generarRFC</span><span class="s2">(</span><span class="s0">this</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+
+    <span class="s0">public </span><span class="s1">String getRfc</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">rfc</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setRfc</span><span class="s2">(</span><span class="s1">String rfc</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">rfc </span><span class="s2">= </span><span class="s1">rfc</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Materia</span><span class="s2">&gt; </span><span class="s1">getMateriasImpartidas</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">materiasImpartidas</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setMateriasImpartidas</span><span class="s2">(</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Materia</span><span class="s2">&gt; </span><span class="s1">materiasImpartidas</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">materiasImpartidas </span><span class="s2">= </span><span class="s1">materiasImpartidas</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public double </span><span class="s1">getSueldo</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">sueldo</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setSueldo</span><span class="s2">(</span><span class="s0">double </span><span class="s1">sueldo</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">sueldo </span><span class="s2">= </span><span class="s1">sueldo</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

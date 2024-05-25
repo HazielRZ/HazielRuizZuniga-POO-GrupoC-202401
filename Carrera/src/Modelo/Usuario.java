@@ -1,4 +1,5 @@
 package Modelo;
+
 import utils.ValidadorCURP;
 
 import java.time.LocalDate;
@@ -20,7 +21,7 @@ public class Usuario {
 
     // Constructor
     public Usuario(String nombre, String apellidos, LocalDate fechaNacimiento, String sexo, String ciudad,
-                   String estado, String direccion, LocalDate fechaRegistro, String rol) {
+                   String estado, String direccion, LocalDate fechaRegistro, String rol, String nombreUsuario, String contrasena) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.fechaNacimiento = fechaNacimiento;
@@ -30,7 +31,9 @@ public class Usuario {
         this.direccion = direccion;
         this.fechaRegistro = fechaRegistro;
         this.rol = rol;
-        this.curp = ValidadorCURP.generarCURP(this); // Generar CURP automáticamente
+        this.curp = ValidadorCURP.generarCURP(this); // Generar CURP automáticament
+        this.nombreUsuario = nombreUsuario;
+        this.contrasena = contrasena;
     }
 
     public int getIdUsuario() {

@@ -2,8 +2,9 @@ package Modelo;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import persistencia.GestorPersistencia;
 import utils.GestorId;
-import utils.ValidadorRFC; // Clase para validar y generar RFC
+import utils.ValidadorRFC;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,8 +15,8 @@ import java.util.List;
 public class Profesor extends Empleado {
     // Constructor
     public Profesor(String nombre, String apellidos, LocalDate fechaNacimiento, String sexo, String ciudad, String estado,
-                    String direccion, double sueldo) {
-        super(nombre, apellidos, fechaNacimiento, sexo, ciudad, estado, direccion, LocalDate.now(), "Profesor", sueldo);
+                    String direccion, double sueldo, String nombreUsuario, String contrasena) {
+        super(nombre, apellidos, fechaNacimiento, sexo, ciudad, estado, direccion, LocalDate.now(), "Profesor",nombreUsuario, contrasena, sueldo);
         GestorId gestorId = GestorId.getInstancia();
         this.idUsuario = gestorId.generarIdProfesor();
 
@@ -36,7 +37,7 @@ public class Profesor extends Empleado {
     // Método para guardar/cargar profesores en JSON
     public static void guardarProfesores(List<Profesor> profesores, String nombreArchivo) {
         try {
-            Gson gson = new Gson();
+            Gson gson = GestorPersistencia.getGson();
             String json = gson.toJson(profesores);
             Files.write(Paths.get(nombreArchivo), json.getBytes());
         } catch (IOException e) {
@@ -46,9 +47,10 @@ public class Profesor extends Empleado {
 
     public static List<Profesor> cargarProfesores(String nombreArchivo) {
         try {
-            Gson gson = new Gson();
+            Gson gson = GestorPersistencia.getGson();
             String json = new String(Files.readAllBytes(Paths.get(nombreArchivo)));
-            return gson.fromJson(json, new TypeToken<List<Profesor>>() {}.getType());
+            return gson.fromJson(json, new TypeToken<List<Profesor>>() {
+            }.getType());
         } catch (IOException e) {
             throw new RuntimeException("Error al cargar profesores desde JSON: " + e.getMessage());
         }

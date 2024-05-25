@@ -1,0 +1,128 @@
+<html>
+<head>
+<title>Main.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Main.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">Fachada</span><span class="s2">.</span><span class="s1">Fachada</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">InicioSesion</span><span class="s2">.</span><span class="s1">InicioSesion</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">Modelo</span><span class="s2">.</span><span class="s1">Carrera</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">Modelo</span><span class="s2">.</span><span class="s1">Coordinador</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">Modelo</span><span class="s2">.</span><span class="s1">Usuario</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">IOException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">nio</span><span class="s2">.</span><span class="s1">file</span><span class="s2">.</span><span class="s1">Files</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">nio</span><span class="s2">.</span><span class="s1">file</span><span class="s2">.</span><span class="s1">Paths</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">time</span><span class="s2">.</span><span class="s1">LocalDate</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ArrayList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Scanner</span><span class="s2">;</span>
+
+
+<span class="s0">public class </span><span class="s1">Main </span><span class="s2">{</span>
+    <span class="s0">public static void </span><span class="s1">main</span><span class="s2">(</span><span class="s1">String</span><span class="s2">[] </span><span class="s1">args</span><span class="s2">) {</span>
+        <span class="s1">Scanner scanner </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scanner</span><span class="s2">(</span><span class="s1">System</span><span class="s2">.</span><span class="s1">in</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s3">&quot;Ingrese su nombre de usuario: &quot;</span><span class="s2">);</span>
+        <span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+        <span class="s1">String nombreUsuario</span><span class="s2">;</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s3">&quot;Ingrese su contraseña: &quot;</span><span class="s2">);</span>
+        <span class="s1">String contrasena </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+        <span class="s1">Fachada fachada </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Fachada</span><span class="s2">(); </span><span class="s4">// Crear la fachada</span>
+        <span class="s4">// ... (cargar carreras desde JSON)</span>
+        <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Carrera</span><span class="s2">&gt; </span><span class="s1">carreras </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+
+        <span class="s4">// Cargar carreras desde JSON si el archivo existe</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">Files</span><span class="s2">.</span><span class="s1">exists</span><span class="s2">(</span><span class="s1">Paths</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s3">&quot;carreras.json&quot;</span><span class="s2">))) {</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">carreras </span><span class="s2">= </span><span class="s1">Carrera</span><span class="s2">.</span><span class="s1">cargarCarreras</span><span class="s2">(</span><span class="s3">&quot;carreras.json&quot;</span><span class="s2">);</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">IOException e</span><span class="s2">) {</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">err</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Error al cargar carreras desde JSON: &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">());</span>
+            <span class="s2">}</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s4">// Crear carreras iniciales si el archivo no existe</span>
+            <span class="s1">carreras</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Carrera</span><span class="s2">(</span><span class="s3">&quot;Ingeniería en Sistemas Computacionales&quot;</span><span class="s2">, </span><span class="s0">null</span><span class="s2">)); </span><span class="s4">// Coordinador se asignará después</span>
+            <span class="s1">carreras</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Carrera</span><span class="s2">(</span><span class="s3">&quot;Ingeniería en Materiales&quot;</span><span class="s2">, </span><span class="s0">null</span><span class="s2">));</span>
+            <span class="s1">carreras</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Carrera</span><span class="s2">(</span><span class="s3">&quot;Ingeniería Electrónica&quot;</span><span class="s2">, </span><span class="s0">null</span><span class="s2">));</span>
+
+            <span class="s4">// Guardar carreras en JSON</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">Carrera</span><span class="s2">.</span><span class="s1">guardarCarreras</span><span class="s2">(</span><span class="s1">carreras</span><span class="s2">, </span><span class="s3">&quot;carreras.json&quot;</span><span class="s2">);</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">IOException e</span><span class="s2">) {</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">err</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Error al guardar carreras en JSON: &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">());</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Coordinador</span><span class="s2">&gt; </span><span class="s1">coordinadores </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+
+        <span class="s4">// Crear coordinadores de ejemplo</span>
+        <span class="s1">Coordinador coordinadorISC </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Coordinador</span><span class="s2">(</span>
+                <span class="s3">&quot;José Manuel&quot;</span><span class="s2">, </span><span class="s3">&quot;Cuin Jacuinde&quot;</span><span class="s2">, </span><span class="s1">LocalDate</span><span class="s2">.</span><span class="s1">parse</span><span class="s2">(</span><span class="s3">&quot;1980-05-12&quot;</span><span class="s2">), </span><span class="s3">&quot;M&quot;</span><span class="s2">, </span><span class="s3">&quot;Morelia&quot;</span><span class="s2">, </span><span class="s3">&quot;MICHOACÁN&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Av. Tecnológico 1500&quot;</span><span class="s2">, </span><span class="s5">50000.0</span><span class="s2">, </span><span class="s1">carreras</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s5">0</span><span class="s2">) </span><span class="s4">// ISC</span>
+        <span class="s2">);</span>
+        <span class="s1">Coordinador coordinadorELC </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Coordinador</span><span class="s2">(</span>
+                <span class="s3">&quot;Eder&quot;</span><span class="s2">, </span><span class="s3">&quot;Rivera Cisneros&quot;</span><span class="s2">, </span><span class="s1">LocalDate</span><span class="s2">.</span><span class="s1">parse</span><span class="s2">(</span><span class="s3">&quot;1985-08-22&quot;</span><span class="s2">), </span><span class="s3">&quot;M&quot;</span><span class="s2">, </span><span class="s3">&quot;Morelia&quot;</span><span class="s2">, </span><span class="s3">&quot;MICHOACÁN&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Calle Revolución 320&quot;</span><span class="s2">, </span><span class="s5">48000.0</span><span class="s2">, </span><span class="s1">carreras</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s5">1</span><span class="s2">) </span><span class="s4">// ELC</span>
+        <span class="s2">);</span>
+        <span class="s1">Coordinador coordinadorIMAT </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Coordinador</span><span class="s2">(</span>
+                <span class="s3">&quot;Juvenal&quot;</span><span class="s2">, </span><span class="s3">&quot;Maldonado Pérez&quot;</span><span class="s2">, </span><span class="s1">LocalDate</span><span class="s2">.</span><span class="s1">parse</span><span class="s2">(</span><span class="s3">&quot;1978-03-18&quot;</span><span class="s2">), </span><span class="s3">&quot;M&quot;</span><span class="s2">, </span><span class="s3">&quot;Morelia&quot;</span><span class="s2">, </span><span class="s3">&quot;MICHOACÁN&quot;</span><span class="s2">,</span>
+                <span class="s3">&quot;Blvd. García de León 789&quot;</span><span class="s2">, </span><span class="s5">52000.0</span><span class="s2">, </span><span class="s1">carreras</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s5">2</span><span class="s2">) </span><span class="s4">// IMAT</span>
+        <span class="s2">);</span>
+
+        <span class="s1">coordinadores</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">coordinadorISC</span><span class="s2">);</span>
+        <span class="s1">coordinadores</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">coordinadorELC</span><span class="s2">);</span>
+        <span class="s1">coordinadores</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">coordinadorIMAT</span><span class="s2">);</span>
+
+        <span class="s4">// Guardar coordinadores en JSON</span>
+        <span class="s1">Coordinador</span><span class="s2">.</span><span class="s1">guardarCoordinadores</span><span class="s2">(</span><span class="s1">coordinadores</span><span class="s2">, </span><span class="s3">&quot;coordinadores.json&quot;</span><span class="s2">);</span>
+
+        <span class="s0">while </span><span class="s2">(</span><span class="s0">true</span><span class="s2">) { </span><span class="s4">// Bucle para mantener el menú activo hasta que el usuario cierre sesión</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s3">&quot;Ingrese su nombre de usuario (o '2' para terminar): &quot;</span><span class="s2">);</span>
+             <span class="s1">nombreUsuario </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">nombreUsuario</span><span class="s2">.</span><span class="s1">equalsIgnoreCase</span><span class="s2">(</span><span class="s3">&quot;2&quot;</span><span class="s2">)) {</span>
+                <span class="s0">break</span><span class="s2">; </span><span class="s4">// Salir del programa</span>
+            <span class="s2">}</span>
+
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s3">&quot;Ingrese su contraseña: &quot;</span><span class="s2">);</span>
+             <span class="s1">contrasena </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">InicioSesion inicioSesion </span><span class="s2">= </span><span class="s0">new </span><span class="s1">InicioSesion</span><span class="s2">(</span><span class="s1">fachada</span><span class="s2">.</span><span class="s1">obtenerAlumnos</span><span class="s2">(), </span><span class="s1">fachada</span><span class="s2">.</span><span class="s1">obtenerProfesores</span><span class="s2">(), </span><span class="s1">fachada</span><span class="s2">.</span><span class="s1">obtenerCoordinadores</span><span class="s2">());</span>
+                <span class="s1">Usuario usuarioActual </span><span class="s2">= </span><span class="s1">inicioSesion</span><span class="s2">.</span><span class="s1">iniciarSesion</span><span class="s2">(</span><span class="s1">nombreUsuario</span><span class="s2">, </span><span class="s1">contrasena</span><span class="s2">);</span>
+
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">usuarioActual </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+                    <span class="s1">fachada</span><span class="s2">.</span><span class="s1">setUsuarioActual</span><span class="s2">(</span><span class="s1">usuarioActual</span><span class="s2">);</span>
+                    <span class="s1">MenuPrincipal menuPrincipal </span><span class="s2">= </span><span class="s0">new </span><span class="s1">MenuPrincipal</span><span class="s2">(</span><span class="s1">fachada</span><span class="s2">, </span><span class="s1">usuarioActual</span><span class="s2">); </span><span class="s4">// Pasar el usuarioActual</span>
+                    <span class="s1">menuPrincipal</span><span class="s2">.</span><span class="s1">mostrar</span><span class="s2">();</span>
+
+                    <span class="s1">fachada</span><span class="s2">.</span><span class="s1">setUsuarioActual</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+                <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                    <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Credenciales incorrectas. Intente nuevamente.&quot;</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">RuntimeException e</span><span class="s2">) {</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">err</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Error durante el inicio de sesión: &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">());</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s1">scanner</span><span class="s2">.</span><span class="s1">close</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+
+</pre>
+</body>
+</html>

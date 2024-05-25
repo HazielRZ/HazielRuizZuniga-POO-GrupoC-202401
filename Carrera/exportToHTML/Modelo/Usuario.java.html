@@ -1,0 +1,161 @@
+<html>
+<head>
+<title>Usuario.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Usuario.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">Modelo</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">utils</span><span class="s2">.</span><span class="s1">ValidadorCURP</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">time</span><span class="s2">.</span><span class="s1">LocalDate</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">Usuario </span><span class="s2">{</span>
+    <span class="s0">int </span><span class="s1">idUsuario</span><span class="s2">;</span>
+    <span class="s0">protected </span><span class="s1">String nombre</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String apellidos</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">LocalDate fechaNacimiento</span><span class="s2">; </span><span class="s3">// Cambiado a LocalDate</span>
+    <span class="s0">private </span><span class="s1">String sexo</span><span class="s2">; </span><span class="s3">// &quot;H&quot; o &quot;M&quot;</span>
+    <span class="s0">private </span><span class="s1">String ciudad</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String estado</span><span class="s2">;</span>
+    <span class="s1">String curp</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String direccion</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">LocalDate fechaRegistro</span><span class="s2">; </span><span class="s3">// Cambiado a LocalDate</span>
+    <span class="s0">private </span><span class="s1">String nombreUsuario</span><span class="s2">; </span><span class="s3">// Para el inicio de sesión</span>
+    <span class="s0">private </span><span class="s1">String contrasena</span><span class="s2">; </span><span class="s3">// Para el inicio de sesión</span>
+    <span class="s0">private </span><span class="s1">String rol</span><span class="s2">; </span><span class="s3">// &quot;Alumno&quot;, &quot;Profesor&quot; o &quot;Coordinador&quot;</span>
+
+    <span class="s3">// Constructor</span>
+    <span class="s0">public </span><span class="s1">Usuario</span><span class="s2">(</span><span class="s1">String nombre</span><span class="s2">, </span><span class="s1">String apellidos</span><span class="s2">, </span><span class="s1">LocalDate fechaNacimiento</span><span class="s2">, </span><span class="s1">String sexo</span><span class="s2">, </span><span class="s1">String ciudad</span><span class="s2">,</span>
+                   <span class="s1">String estado</span><span class="s2">, </span><span class="s1">String direccion</span><span class="s2">, </span><span class="s1">LocalDate fechaRegistro</span><span class="s2">, </span><span class="s1">String rol</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">nombre </span><span class="s2">= </span><span class="s1">nombre</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">apellidos </span><span class="s2">= </span><span class="s1">apellidos</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">fechaNacimiento </span><span class="s2">= </span><span class="s1">fechaNacimiento</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">sexo </span><span class="s2">= </span><span class="s1">sexo</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">ciudad </span><span class="s2">= </span><span class="s1">ciudad</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">estado </span><span class="s2">= </span><span class="s1">estado</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">direccion </span><span class="s2">= </span><span class="s1">direccion</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">fechaRegistro </span><span class="s2">= </span><span class="s1">fechaRegistro</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">rol </span><span class="s2">= </span><span class="s1">rol</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">curp </span><span class="s2">= </span><span class="s1">ValidadorCURP</span><span class="s2">.</span><span class="s1">generarCURP</span><span class="s2">(</span><span class="s0">this</span><span class="s2">); </span><span class="s3">// Generar CURP automáticamente</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public int </span><span class="s1">getIdUsuario</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">idUsuario</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setIdUsuario</span><span class="s2">(</span><span class="s0">int </span><span class="s1">idUsuario</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">idUsuario </span><span class="s2">= </span><span class="s1">idUsuario</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getNombre</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">nombre</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setNombre</span><span class="s2">(</span><span class="s1">String nombre</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">nombre </span><span class="s2">= </span><span class="s1">nombre</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getApellidos</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">apellidos</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setApellidos</span><span class="s2">(</span><span class="s1">String apellidos</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">apellidos </span><span class="s2">= </span><span class="s1">apellidos</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">LocalDate getFechaNacimiento</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">fechaNacimiento</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setFechaNacimiento</span><span class="s2">(</span><span class="s1">LocalDate fechaNacimiento</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">fechaNacimiento </span><span class="s2">= </span><span class="s1">fechaNacimiento</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getSexo</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">sexo</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setSexo</span><span class="s2">(</span><span class="s1">String sexo</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">sexo </span><span class="s2">= </span><span class="s1">sexo</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getCiudad</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">ciudad</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setCiudad</span><span class="s2">(</span><span class="s1">String ciudad</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">ciudad </span><span class="s2">= </span><span class="s1">ciudad</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getEstado</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">estado</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setEstado</span><span class="s2">(</span><span class="s1">String estado</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">estado </span><span class="s2">= </span><span class="s1">estado</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getCurp</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">curp</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setCurp</span><span class="s2">(</span><span class="s1">String curp</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">curp </span><span class="s2">= </span><span class="s1">curp</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getDireccion</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">direccion</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setDireccion</span><span class="s2">(</span><span class="s1">String direccion</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">direccion </span><span class="s2">= </span><span class="s1">direccion</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">LocalDate getFechaRegistro</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">fechaRegistro</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setFechaRegistro</span><span class="s2">(</span><span class="s1">LocalDate fechaRegistro</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">fechaRegistro </span><span class="s2">= </span><span class="s1">fechaRegistro</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getNombreUsuario</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">nombreUsuario</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setNombreUsuario</span><span class="s2">(</span><span class="s1">String nombreUsuario</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">nombreUsuario </span><span class="s2">= </span><span class="s1">nombreUsuario</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getContrasena</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">contrasena</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setContrasena</span><span class="s2">(</span><span class="s1">String contrasena</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">contrasena </span><span class="s2">= </span><span class="s1">contrasena</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getRol</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">rol</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setRol</span><span class="s2">(</span><span class="s1">String rol</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">rol </span><span class="s2">= </span><span class="s1">rol</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+</pre>
+</body>
+</html>

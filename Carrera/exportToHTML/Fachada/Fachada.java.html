@@ -1,0 +1,145 @@
+<html>
+<head>
+<title>Fachada.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Fachada.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">Fachada</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">Modelo</span><span class="s2">.*;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">IOException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ArrayList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">stream</span><span class="s2">.</span><span class="s1">Collectors</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">Fachada </span><span class="s2">{</span>
+    <span class="s0">private </span><span class="s1">Usuario usuarioActual</span><span class="s2">;</span>
+
+    <span class="s0">public void </span><span class="s1">setUsuarioActual</span><span class="s2">(</span><span class="s1">Usuario usuario</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">usuarioActual </span><span class="s2">= </span><span class="s1">usuario</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Usuario getUsuarioActual</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">usuarioActual</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Alumno</span><span class="s2">&gt; </span><span class="s1">alumnos</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Profesor</span><span class="s2">&gt; </span><span class="s1">profesores</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Coordinador</span><span class="s2">&gt; </span><span class="s1">coordinadores</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Carrera</span><span class="s2">&gt; </span><span class="s1">carreras</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Semestre</span><span class="s2">&gt; </span><span class="s1">semestres</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Grupo</span><span class="s2">&gt; </span><span class="s1">grupos</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Materia</span><span class="s2">&gt; </span><span class="s1">materias</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Calificacion</span><span class="s2">&gt; </span><span class="s1">calificaciones</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">Fachada</span><span class="s2">() {</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s0">this</span><span class="s2">.</span><span class="s1">alumnos </span><span class="s2">= </span><span class="s1">Alumno</span><span class="s2">.</span><span class="s1">cargarAlumnos</span><span class="s2">(</span><span class="s3">&quot;alumnos.json&quot;</span><span class="s2">);</span>
+            <span class="s0">this</span><span class="s2">.</span><span class="s1">profesores </span><span class="s2">= </span><span class="s1">Profesor</span><span class="s2">.</span><span class="s1">cargarProfesores</span><span class="s2">(</span><span class="s3">&quot;profesores.json&quot;</span><span class="s2">);</span>
+            <span class="s0">this</span><span class="s2">.</span><span class="s1">coordinadores </span><span class="s2">= </span><span class="s1">Coordinador</span><span class="s2">.</span><span class="s1">cargarCoordinadores</span><span class="s2">(</span><span class="s3">&quot;coordinadores.json&quot;</span><span class="s2">);</span>
+            <span class="s0">this</span><span class="s2">.</span><span class="s1">carreras </span><span class="s2">= </span><span class="s1">Carrera</span><span class="s2">.</span><span class="s1">cargarCarreras</span><span class="s2">(</span><span class="s3">&quot;carreras.json&quot;</span><span class="s2">);</span>
+            <span class="s0">this</span><span class="s2">.</span><span class="s1">semestres </span><span class="s2">= </span><span class="s1">Semestre</span><span class="s2">.</span><span class="s1">cargarSemestres</span><span class="s2">(</span><span class="s3">&quot;semestres.json&quot;</span><span class="s2">);</span>
+            <span class="s0">this</span><span class="s2">.</span><span class="s1">grupos </span><span class="s2">= </span><span class="s1">Grupo</span><span class="s2">.</span><span class="s1">cargarGrupos</span><span class="s2">(</span><span class="s3">&quot;grupos.json&quot;</span><span class="s2">);</span>
+            <span class="s0">this</span><span class="s2">.</span><span class="s1">materias </span><span class="s2">= </span><span class="s1">Materia</span><span class="s2">.</span><span class="s1">cargarMaterias</span><span class="s2">(</span><span class="s3">&quot;materias.json&quot;</span><span class="s2">);</span>
+            <span class="s0">this</span><span class="s2">.</span><span class="s1">calificaciones </span><span class="s2">= </span><span class="s1">Calificacion</span><span class="s2">.</span><span class="s1">cargarCalificaciones</span><span class="s2">(</span><span class="s3">&quot;calificaciones.json&quot;</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">IOException e</span><span class="s2">) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">err</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Error al cargar datos: &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">());</span>
+            <span class="s4">// Manejar el error de forma adecuada (por ejemplo, crear datos iniciales)</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s4">// Métodos para interactuar con alumnos</span>
+    <span class="s0">public void </span><span class="s1">registrarAlumno</span><span class="s2">(</span><span class="s1">Alumno alumno</span><span class="s2">) {</span>
+        <span class="s1">Alumno</span><span class="s2">.</span><span class="s1">crearAlumno</span><span class="s2">(</span><span class="s1">alumno</span><span class="s2">, </span><span class="s0">this</span><span class="s2">.</span><span class="s1">alumnos</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Alumno</span><span class="s2">&gt; </span><span class="s1">obtenerAlumnos</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">alumnos</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s4">// Métodos para interactuar con profesores</span>
+    <span class="s0">public void </span><span class="s1">registrarProfesor</span><span class="s2">(</span><span class="s1">Profesor profesor</span><span class="s2">) {</span>
+        <span class="s1">Profesor</span><span class="s2">.</span><span class="s1">crearProfesor</span><span class="s2">(</span><span class="s1">profesor</span><span class="s2">, </span><span class="s0">this</span><span class="s2">.</span><span class="s1">profesores</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Profesor</span><span class="s2">&gt; </span><span class="s1">obtenerProfesores</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">profesores</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s4">// Métodos para interactuar con coordinadores</span>
+    <span class="s0">public void </span><span class="s1">registrarCoordinador</span><span class="s2">(</span><span class="s1">Coordinador coordinador</span><span class="s2">) {</span>
+        <span class="s1">Coordinador</span><span class="s2">.</span><span class="s1">crearCoordinador</span><span class="s2">(</span><span class="s1">coordinador</span><span class="s2">, </span><span class="s0">this</span><span class="s2">.</span><span class="s1">coordinadores</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Coordinador</span><span class="s2">&gt; </span><span class="s1">obtenerCoordinadores</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">coordinadores</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">registrarCalificacion</span><span class="s2">(</span><span class="s1">Calificacion calificacion</span><span class="s2">) {</span>
+        <span class="s4">// Validar que el profesor sea el que imparte la materia</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">calificacion</span><span class="s2">.</span><span class="s1">getMateria</span><span class="s2">().</span><span class="s1">getProfesor</span><span class="s2">().</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">usuarioActual</span><span class="s2">)) { </span><span class="s4">// Asumiendo que tienes un usuarioActual en la fachada</span>
+            <span class="s1">Calificacion</span><span class="s2">.</span><span class="s1">crearCalificacion</span><span class="s2">(</span><span class="s1">calificacion</span><span class="s2">, </span><span class="s0">this</span><span class="s2">.</span><span class="s1">calificaciones</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s0">throw new </span><span class="s1">RuntimeException</span><span class="s2">(</span><span class="s3">&quot;Solo el profesor de la materia puede registrar calificaciones.&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Calificacion</span><span class="s2">&gt; </span><span class="s1">obtenerCalificaciones</span><span class="s2">(</span><span class="s1">Grupo grupo</span><span class="s2">, </span><span class="s1">Materia materia</span><span class="s2">, </span><span class="s1">Semestre semestre</span><span class="s2">, </span><span class="s0">boolean </span><span class="s1">aprobatoria</span><span class="s2">) {</span>
+        <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Calificacion</span><span class="s2">&gt; </span><span class="s1">calificacionesFiltradas </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;(</span><span class="s1">calificaciones</span><span class="s2">);</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">grupo </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">calificacionesFiltradas </span><span class="s2">= </span><span class="s1">Calificacion</span><span class="s2">.</span><span class="s1">filtrarPorGrupo</span><span class="s2">(</span><span class="s1">calificacionesFiltradas</span><span class="s2">, </span><span class="s1">grupo</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">materia </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">calificacionesFiltradas </span><span class="s2">= </span><span class="s1">Calificacion</span><span class="s2">.</span><span class="s1">filtrarPorMateria</span><span class="s2">(</span><span class="s1">calificacionesFiltradas</span><span class="s2">, </span><span class="s1">materia</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">semestre </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">calificacionesFiltradas </span><span class="s2">= </span><span class="s1">Calificacion</span><span class="s2">.</span><span class="s1">filtrarPorSemestre</span><span class="s2">(</span><span class="s1">calificacionesFiltradas</span><span class="s2">, </span><span class="s1">semestre</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">aprobatoria </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) { </span><span class="s4">// Filtrar por aprobatoria/reprobatoria solo si se especifica</span>
+            <span class="s1">calificacionesFiltradas </span><span class="s2">= </span><span class="s1">Calificacion</span><span class="s2">.</span><span class="s1">filtrarPorEstado</span><span class="s2">(</span><span class="s1">calificacionesFiltradas</span><span class="s2">, </span><span class="s1">aprobatoria</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">calificacionesFiltradas</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Calificacion</span><span class="s2">&gt; </span><span class="s1">obtenerCalificacionesPorAlumno</span><span class="s2">(</span><span class="s0">int </span><span class="s1">idAlumno</span><span class="s2">) {</span>
+        <span class="s0">return </span><span class="s1">calificaciones</span><span class="s2">.</span><span class="s1">stream</span><span class="s2">()</span>
+                <span class="s2">.</span><span class="s1">filter</span><span class="s2">(</span><span class="s1">calificacion -&gt; calificacion</span><span class="s2">.</span><span class="s1">getAlumno</span><span class="s2">().</span><span class="s1">getIdUsuario</span><span class="s2">() == </span><span class="s1">idAlumno</span><span class="s2">)</span>
+                <span class="s2">.</span><span class="s1">collect</span><span class="s2">(</span><span class="s1">Collectors</span><span class="s2">.</span><span class="s1">toList</span><span class="s2">());</span>
+    <span class="s2">}</span>
+
+    <span class="s4">// Métodos para graduados</span>
+    <span class="s0">public void </span><span class="s1">registrarGraduado</span><span class="s2">(</span><span class="s1">Graduado graduado</span><span class="s2">) {</span>
+        <span class="s4">// ... (lógica para registrar un graduado)</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">Graduado</span><span class="s2">&gt; </span><span class="s1">obtenerGraduados</span><span class="s2">() {</span>
+        <span class="s4">// ... (lógica para obtener graduados)</span>
+    <span class="s2">}</span>
+
+    <span class="s4">// Método para avanzar semestre (solo para coordinadores)</span>
+    <span class="s0">public void </span><span class="s1">avanzarSemestre</span><span class="s2">(</span><span class="s1">Grupo grupo</span><span class="s2">) {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">usuarioActual </span><span class="s0">instanceof </span><span class="s1">Coordinador </span><span class="s2">&amp;&amp; ((</span><span class="s1">Coordinador</span><span class="s2">) </span><span class="s1">usuarioActual</span><span class="s2">).</span><span class="s1">getCarrera</span><span class="s2">().</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">grupo</span><span class="s2">.</span><span class="s1">getCarrera</span><span class="s2">())) {</span>
+            <span class="s1">grupo</span><span class="s2">.</span><span class="s1">getSemestre</span><span class="s2">().</span><span class="s1">avanzarSemestre</span><span class="s2">(</span><span class="s1">grupo</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s0">throw new </span><span class="s1">RuntimeException</span><span class="s2">(</span><span class="s3">&quot;Solo el coordinador de la carrera puede avanzar el semestre.&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+    <span class="s4">// Métodos para interactuar con carreras, semestres, grupos, materias y calificaciones</span>
+    <span class="s4">// ... (agregar métodos según las necesidades de los menús)</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

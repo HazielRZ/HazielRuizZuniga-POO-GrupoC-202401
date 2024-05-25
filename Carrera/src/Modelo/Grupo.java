@@ -2,6 +2,7 @@ package Modelo;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import persistencia.GestorPersistencia;
 import utils.GestorId;
 
 import java.io.IOException;
@@ -103,7 +104,7 @@ public class Grupo {
 
     // Métodos para guardar/cargar grupos en JSON
     public static void guardarGrupos(List<Grupo> grupos, String nombreArchivo) throws IOException {
-        Gson gson = new Gson();
+        Gson gson = GestorPersistencia.getGson();
         String json = gson.toJson(grupos);
         Files.write(Paths.get(nombreArchivo), json.getBytes());
     }
@@ -111,7 +112,8 @@ public class Grupo {
     public static List<Grupo> cargarGrupos(String nombreArchivo) throws IOException {
         Gson gson = new Gson();
         String json = new String(Files.readAllBytes(Paths.get(nombreArchivo)));
-        return gson.fromJson(json, new TypeToken<List<Grupo>>() {}.getType());
+        return gson.fromJson(json, new TypeToken<List<Grupo>>() {
+        }.getType());
     }
 
     // Validaciones (puedes agregar más según tus necesidades)
