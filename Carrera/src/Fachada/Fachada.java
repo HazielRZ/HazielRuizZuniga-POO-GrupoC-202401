@@ -31,11 +31,11 @@ public class Fachada {
     private List<Calificacion> calificaciones;
 
     public Fachada() {
+
         try {
             this.alumnos = GestorPersistencia.cargar("alumnos.json", Alumno.class);
             this.profesores = GestorPersistencia.cargar("profesores.json", Profesor.class);
-            this.coordinadores = GestorPersistencia.cargar("coordinadores.json", Coordinador.class);
-            this.carreras = GestorPersistencia.cargar("carreras.json", Carrera.class);
+
             this.semestres = GestorPersistencia.cargar("semestres.json", Semestre.class);
             this.grupos = GestorPersistencia.cargar("grupos.json", Grupo.class);
             this.materias = GestorPersistencia.cargar("materias.json", Materia.class);

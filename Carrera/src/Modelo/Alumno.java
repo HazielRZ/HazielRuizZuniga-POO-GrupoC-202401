@@ -2,6 +2,7 @@ package Modelo;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import persistencia.GestorPersistencia;
 import utils.GestorId;
 import utils.ValidadorCURP;
 
@@ -111,7 +112,7 @@ public class Alumno extends Usuario {
     // Método para guardar/cargar alumnos en JSON
     public static void guardarAlumnos(List<Alumno> alumnos, String nombreArchivo) {
         try {
-            Gson gson = new Gson();
+            Gson gson = GestorPersistencia.getGson();
             String json = gson.toJson(alumnos);
             Files.write(Paths.get(nombreArchivo), json.getBytes());
         } catch (IOException e) {
@@ -121,12 +122,13 @@ public class Alumno extends Usuario {
 
     public static List<Alumno> cargarAlumnos(String nombreArchivo) {
         try {
-            Gson gson = new Gson();
+            Gson gson = GestorPersistencia.getGson();
             String json = new String(Files.readAllBytes(Paths.get(nombreArchivo)));
             return gson.fromJson(json, new TypeToken<List<Alumno>>() {
             }.getType());
         } catch (IOException e) {
             throw new RuntimeException("Error al cargar alumnos desde JSON: " + e.getMessage());
+
         }
     }
 
