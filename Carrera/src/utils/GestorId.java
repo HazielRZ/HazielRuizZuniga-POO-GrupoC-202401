@@ -8,12 +8,12 @@ import java.nio.file.Paths;
 
 public class GestorId {
 
-    private int contadorCarreras = 1;
-    private int contadorSemestres = 1;
-    private int contadorGrupos = 1;
-    private int contadorMaterias = 1;
-    private int contadorAlumnos = 1;
-    private int contadorProfesores = 1;
+    private int contadorCarreras = 0;
+    private int contadorSemestres = 0;
+    private int contadorGrupos = 0;
+    private int contadorMaterias = 0;
+    private int contadorAlumnos = 0;
+    private int contadorProfesores = 0;
 
     // Singleton para asegurar una única instancia del utils.GestorId
     private static GestorId instancia = null;

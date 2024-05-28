@@ -1,10 +1,16 @@
 package persistencia;
 
 
+import Modelo.Carrera;
+import Modelo.Grupo;
+import Modelo.Semestre;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import utils.CarreraAdapter;
+import utils.GrupoAdapter;
 import utils.LocalDateAdapter;
+import utils.SemestreAdapter;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +25,9 @@ public class GestorPersistencia {
 
     private static final Gson gson = new GsonBuilder()
             .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+            .registerTypeAdapter(Carrera.class, new CarreraAdapter())
+            .registerTypeAdapter(Semestre.class, new SemestreAdapter())
+            .registerTypeAdapter(Grupo.class, new GrupoAdapter())
             .create();
 
     public static <T> void guardar(List<T> entidades, String nombreArchivo) throws IOException {

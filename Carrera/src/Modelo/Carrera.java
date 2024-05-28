@@ -24,8 +24,7 @@ public class Carrera {
 
     private LocalDate fechaCreacion;
     private Coordinador coordinador;
-
-    // Constructor
+    // Nuevo constructor para cargar desde JSO
     public Carrera(String nombre, Coordinador coordinador) {
         GestorId gestorId = GestorId.getInstancia();
         this.idCarrera = gestorId.generarIdCarrera();
@@ -37,6 +36,16 @@ public class Carrera {
         this.coordinador = coordinador;
     }
 
+    public Carrera(int idCarrera, String nombre, int cantidadGrupos, int cantidadAlumnos, int cantidadMaterias,
+                   LocalDate fechaCreacion, Coordinador coordinador) {
+        this.idCarrera = idCarrera;
+        this.nombre = nombre;
+        this.cantidadGrupos = cantidadGrupos;
+        this.cantidadAlumnos = cantidadAlumnos;
+        this.cantidadMaterias = cantidadMaterias;
+        this.fechaCreacion = fechaCreacion;
+        this.coordinador = coordinador;
+    }
     public int getIdCarrera() {
         return idCarrera;
     }
